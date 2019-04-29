@@ -1,6 +1,6 @@
 export const calculateClockOutTime = (startHours, startMinutes) => {
   let hours = calculateClockOutHours(startHours)
-  let time = { hours, minutes: startMinutes }
+  let time = { hours, minutes: parseInt(startMinutes) }
   return time
 }
 
