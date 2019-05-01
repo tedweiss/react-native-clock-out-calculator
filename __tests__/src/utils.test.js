@@ -25,4 +25,7 @@ describe('determineAmPm', () => {
   test("should return 'am' when the number '0' for midnight is given", () => {
     expect(determineAmPm(0)).toEqual('am')
   })
+  test("should return 'pm' when the number '12' for noon is given", () => {
+    expect(determineAmPm(12)).toEqual('pm')
+  })
 })
