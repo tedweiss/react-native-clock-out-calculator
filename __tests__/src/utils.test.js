@@ -4,6 +4,9 @@ describe('calculateClockOutHours', () => {
   test('should return the hour someone should clock out based on an 8 hour day', () => {
     expect(calculateClockOutHours(9)).toEqual(5)
   })
+  test('should return the hour someone should clock out based on an 8 hour day, if both clock in and clock out times are in the am', () => {
+    expect(calculateClockOutHours(2)).toEqual(10)
+  })
 })
 
 describe('calculateClockOutTime', () => {
