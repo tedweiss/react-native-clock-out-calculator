@@ -22,4 +22,7 @@ describe('determineAmPm', () => {
   test("should return 'pm' when a number after '12' is given", () => {
     expect(determineAmPm(19)).toEqual('pm')
   })
+  test("should return 'am' when the number '0' for midnight is given", () => {
+    expect(determineAmPm(0)).toEqual('am')
+  })
 })
