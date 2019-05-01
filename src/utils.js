@@ -15,15 +15,21 @@ export const calculateClockOutHours = startHours => {
   let afternoonClockInTime = startHoursAmPm === 'pm'
   let afternoonClockOutTime = determineAmPm(clockOutTime) === 'pm'
   let afternoonShift = afternoonClockInTime && afternoonClockOutTime
+  let midnightShift = afternoonClockInTime && morningClockOutTime
   if (morningShift || afternoonShift) {
     clockOutHours = clockOutTime
+    } else if (midnightShift) {
+      clockOutHours = clockOutTime - 24
   } else {
     clockOutHours = clockOutTime - 12
   }
   return clockOutHours
 }
 
-export const determineAmPm = hour => {
-  let amPm = parseInt(hour) >= 12 ? 'pm' : 'am'
+export const determineAmPm = time => {
+  let hour = parseInt(time)
+  let afternoon = hour >= 12
+  let beforeMidnight = hour < 24
+  let amPm = afternoon && beforeMidnight ? 'pm' : 'am'
   return amPm
 }

@@ -1,7 +1,7 @@
 import { calculateClockOutHours, calculateClockOutTime, determineAmPm } from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
-  test('should return the hour someone should clock out based on an 8 hour day', () => {
+  test('should return the hour someone should clock out based on a normal 8 hour day', () => {
     expect(calculateClockOutHours(9)).toEqual(5)
   })
   test('should return the hour someone should clock out based on an 8 hour day, if both clock in and clock out times are in the am', () => {
@@ -9,6 +9,9 @@ describe('calculateClockOutHours', () => {
   })
   test('should return the hour someone should clock out based on an 8 hour day, if both clock in and clock out times are in the pm', () => {
     expect(calculateClockOutHours(13)).toEqual(21)
+  })
+  test('should return the hour someone should clock out based on an 8 hour day, if clock in is before midnight and clock out is after midnight', () => {
+    expect(calculateClockOutHours(20)).toEqual(4)
   })
 })
 
