@@ -8,3 +8,8 @@ export const calculateClockOutHours = startHours => {
   let hours = parseInt(startHours) + 8 - 12
   return hours
 }
+
+export const determineAmPm = hour => {
+  let amPm = hour >= 12 ? 'pm' : 'am'
+  return amPm
+}
