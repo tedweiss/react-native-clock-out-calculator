@@ -14,13 +14,14 @@ export const calculateClockOutHours = startHours => {
   let morningShift = morningClockInTime && morningClockOutTime
   let afternoonClockInTime = startHoursAmPm === 'pm'
   let afternoonClockOutTime = determineAmPm(clockOutTime) === 'pm'
+  let dayShift = morningClockInTime && afternoonClockOutTime
   let afternoonShift = afternoonClockInTime && afternoonClockOutTime
   let midnightShift = afternoonClockInTime && morningClockOutTime
-  if (morningShift || afternoonShift) {
+  if (morningShift) {
     clockOutHours = clockOutTime
-    } else if (midnightShift) {
-      clockOutHours = clockOutTime - 24
-  } else {
+  } else if (midnightShift) {
+    clockOutHours = clockOutTime - 24
+  } else if (dayShift || afternoonShift) {
     clockOutHours = clockOutTime - 12
   }
   return clockOutHours
