@@ -27,6 +27,10 @@ export const calculateClockOutHours = startHours => {
     clockOutHours = clockOutTime - 12
     amPm = 'pm'
   }
+  let midnight = clockOutHours === 0
+  if (midnight) {
+    clockOutHours = 12
+  }
   return { hours: clockOutHours, amPm }
 }
 
