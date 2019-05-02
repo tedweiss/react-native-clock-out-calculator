@@ -16,6 +16,9 @@ describe('calculateClockOutHours', () => {
   test("should return '12' for midnight instead of '0'", () => {
     expect(calculateClockOutHours(16).hours).toEqual(12)
   })
+  test("should return 'am' when clocking in  and out before noon", () => {
+    expect(calculateClockOutHours(2).amPm).toEqual('am')
+  })
 })
 
 describe('calculateClockOutTime', () => {
