@@ -9,6 +9,7 @@ const TimePicker = () => {
   const [hours, setHours] = useState()
   const [minutes, setMinutes] = useState()
   const [amPm, setAmPm] = useState()
+  const [displayTime, setDisplayTime] = useState(false)
   let dateHours = date.getHours()
   let dateMinutes = date.getMinutes()
   const handlePress = () => {
@@ -17,14 +18,18 @@ const TimePicker = () => {
     setHours(hours)
     setMinutes(minutes)
     setAmPm(amPm)
+    setDisplayTime(true)
+  }
+  const handleDateChange = () => {
+    displayTime ? setDisplayTime(false) : ''
   }
   return (
     <View style={{ width: 300 }}>
-      <DatePickerIOS date={date} onDateChange={setDate} mode={'time'} />
+      <DatePickerIOS date={date} onDateChange={setDate} onChange={handleDateChange} mode={'time'} />
       <TouchableOpacity onPress={handlePress} style={styles.button}>
         <Text style={styles.buttonText}>Find Clock Out Time</Text>
       </TouchableOpacity>
-      <DisplayClockOutTime hours={hours} minutes={minutes} amPm={amPm} />
+      <DisplayClockOutTime displayTime={displayTime} hours={hours} minutes={minutes} amPm={amPm} />
     </View>
   )
 }

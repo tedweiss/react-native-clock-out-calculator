@@ -2,13 +2,17 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 const DisplayClockOutTime = props => {
-  const { amPm, hours, minutes } = props
+  const { amPm, displayTime, hours, minutes } = props
   return (
     <View style={styles.timeDisplay}>
-      <Text style={styles.timeText}>{hours}</Text>
-      <Text style={styles.timeText}>:</Text>
-      <Text style={styles.timeText}>{minutes}</Text>
-      <Text style={styles.timeText}>{amPm}</Text>
+      {displayTime && (
+        <>
+          <Text style={styles.timeText}>{hours}</Text>
+          <Text style={styles.timeText}>:</Text>
+          <Text style={styles.timeText}>{minutes}</Text>
+          <Text style={styles.timeText}>{amPm}</Text>
+        </>
+      )}
     </View>
   )
 }
@@ -18,6 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    height: 100,
     marginTop: 25
   },
   timeText: {
