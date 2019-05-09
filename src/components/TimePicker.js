@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { DatePickerIOS, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { calculateClockOutTime } from './utils'
+
+import DisplayClockOutTime from './DisplayClockOutTime'
+import { calculateClockOutTime } from '../utils'
 
 const TimePicker = () => {
   const [date, setDate] = useState(new Date())
@@ -22,12 +24,7 @@ const TimePicker = () => {
       <TouchableOpacity onPress={handlePress} style={styles.button}>
         <Text style={styles.buttonText}>Find Clock Out Time</Text>
       </TouchableOpacity>
-      <View style={styles.timeDisplay}>
-        <Text style={styles.timeText}>{hours}</Text>
-        <Text style={styles.timeText}>:</Text>
-        <Text style={styles.timeText}>{minutes}</Text>
-        <Text style={styles.timeText}>{amPm}</Text>
-      </View>
+      <DisplayClockOutTime hours={hours} minutes={minutes} amPm={amPm} />
     </View>
   )
 }
@@ -49,15 +46,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold'
-  },
-  timeDisplay: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginTop: 25
-  },
-  timeText: {
-    fontSize: 20
   }
 })
 
