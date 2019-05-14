@@ -15,8 +15,9 @@ const TimePicker = () => {
   const handlePress = () => {
     let clockOutTime = calculateClockOutTime(dateHours, dateMinutes)
     const { amPm, hours, minutes } = clockOutTime
-    setHours(hours)
-    setMinutes(minutes)
+    let displayMinutes = minutes < 10 ? '0' + minutes : minutes
+    setHours(hours.toString())
+    setMinutes(displayMinutes.toString())
     setAmPm(amPm)
     setDisplayTime(true)
   }
