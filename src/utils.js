@@ -43,8 +43,10 @@ export const determineAmPm = time => {
 }
 
 export const handleLunchMinutes = minutes => {
+  let hour = 0
   if (minutes >= 60) {
     minutes -= 60
+    hour = 1
   }
-  return minutes
+  return { hour, minutes }
 }
