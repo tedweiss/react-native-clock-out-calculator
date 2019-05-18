@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import TimePicker from './TimePicker'
+
+import TimePicker from './components/TimePicker'
 
 const App = () => {
   return (
