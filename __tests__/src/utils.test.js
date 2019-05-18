@@ -1,4 +1,4 @@
-import { calculateClockOutHours, calculateClockOutTime, determineAmPm } from '../../src/utils'
+import { calculateClockOutHours, calculateClockOutTime, determineAmPm, handleLunchMinutes } from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
   test('should return the hour someone should clock out based on a normal 8 hour day', () => {
@@ -51,5 +51,13 @@ describe('determineAmPm', () => {
   })
   test("should return 'pm' when the number '12' for noon is given", () => {
     expect(determineAmPm(12)).toEqual('pm')
+  })
+})
+
+describe('handleLunchMinutes', () => {
+  test('should return the minutes that are passed in if less than 60', () => {
+    let minutes = 45
+    let returnedMinutes = 45
+    expect(handleLunchMinutes(minutes)).toEqual(returnedMinutes)
   })
 })
