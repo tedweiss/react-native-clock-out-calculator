@@ -41,3 +41,7 @@ export const determineAmPm = time => {
   let amPm = afternoon && beforeMidnight ? 'pm' : 'am'
   return amPm
 }
+
+export const handleLunchMinutes = minutes => {
+  return minutes
+}
