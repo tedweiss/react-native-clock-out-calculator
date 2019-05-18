@@ -60,4 +60,9 @@ describe('handleLunchMinutes', () => {
     let returnedMinutes = 45
     expect(handleLunchMinutes(minutes)).toEqual(returnedMinutes)
   })
+  test('should return the minutes that are passed in minus 60 if more than 60', () => {
+    let minutes = 80
+    let returnedMinutes = 20
+    expect(handleLunchMinutes(minutes)).toEqual(returnedMinutes)
+  })
 })
