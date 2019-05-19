@@ -1,7 +1,11 @@
-export const calculateClockOutTime = (startHours, startMinutes) => {
-  let hours = calculateClockOutHours(startHours).hours
-  let amPm = calculateClockOutHours(startHours).amPm
-  let time = { hours, minutes: parseInt(startMinutes), amPm }
+export const calculateClockOutTime = (startHours, startMinutes, lunchMinutes) => {
+  let handledMinutes = handleMinutes(lunchMinutes, startMinutes)
+  let minutes = handledMinutes.minutes
+  let calculatedClockOutHours = calculateClockOutHours(startHours)
+  let hours = calculatedClockOutHours.hours
+  hours += handledMinutes.hour
+  let amPm = calculatedClockOutHours.amPm
+  let time = { hours, minutes, amPm }
   return time
 }
 
