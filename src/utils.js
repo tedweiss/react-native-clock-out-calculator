@@ -35,7 +35,8 @@ export const calculateClockOutHours = startHours => {
 }
 
 export const handleMinutes = (lunchMinutes, startMinutes) => {
-  startMinutes = startMinutes || 0
+  startMinutes = parseInt(startMinutes) || 0
+  lunchMinutes = parseInt(lunchMinutes) || 0
   let minutes = lunchMinutes + startMinutes
   let hour = 0
   if (minutes >= 60) {
