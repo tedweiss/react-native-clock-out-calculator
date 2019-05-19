@@ -70,10 +70,16 @@ describe('handleLunchMinutes', () => {
     let hour = 1
     expect(handleLunchMinutes(minutes).hour).toEqual(hour)
   })
-  test('should return the total minutes of start hours plus lunch hours that are passed in if total is less than 60', () => {
+  test('should return the total minutes of start minutes plus lunch minutes that are passed in if total is less than 60', () => {
     let startMinutes = 15
     let lunchMinutes = 10
     let returnedMinutes = 25
+    expect(handleLunchMinutes(lunchMinutes,startMinutes).minutes).toEqual(returnedMinutes)
+  })
+  test('should return the total minutes of start minutes plus lunch minutes that are passed in if total is more than 60', () => {
+    let startMinutes = 45
+    let lunchMinutes = 50
+    let returnedMinutes = 35
     expect(handleLunchMinutes(lunchMinutes,startMinutes).minutes).toEqual(returnedMinutes)
   })
 })
