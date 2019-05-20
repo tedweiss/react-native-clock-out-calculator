@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { DatePickerIOS, TextInput, View} from 'react-native'
+import { DatePickerIOS, View } from 'react-native'
 
 import DisplayClockOutTime from './DisplayClockOutTime'
+import Input from './Input'
 import ClockOutButton from './ClockOutButton'
 import { calculateClockOutTime } from '../utils'
 
@@ -16,7 +17,7 @@ const TimePicker = () => {
   let dateMinutes = date.getMinutes()
 
   const updateTime = () => {
-    let clockOutTime = calculateClockOutTime(dateHours, dateMinutes,lunchTime)
+    let clockOutTime = calculateClockOutTime(dateHours, dateMinutes, lunchTime)
     const { amPm, hours, minutes } = clockOutTime
     let displayMinutes = minutes < 10 ? '0' + minutes : minutes
     setHours(hours.toString())
@@ -27,35 +28,13 @@ const TimePicker = () => {
   const handleDateChange = () => {
     displayTime ? setDisplayTime(false) : ''
   }
-  const handleChangeText = minutes => {
+  const updateLunchTime = minutes => {
     setLunchTime(minutes)
   }
   return (
     <View style={{ width: 300 }}>
       <DatePickerIOS date={date} onDateChange={setDate} onChange={handleDateChange} mode={'time'} />
-      <View
-        style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          marginTop: 25
-        }}>
-        <TextInput
-          placeholder={'Minutes for Lunch'}
-          keyboardType={'numeric'}
-          onChangeText={handleChangeText}
-          style={{
-            textAlign: 'center',
-            paddingTop: 15,
-            paddingBottom: 15,
-            marginBottom: 25,
-            width: 238,
-            fontSize: 20,
-            borderWidth: 1,
-            borderColor: 'powderblue'
-          }}
-        />
-      </View>
+      <Input changeText={updateLunchTime} placeholder={'Minutes for Lunch'}/>
       <ClockOutButton updateTime={updateTime} />
       <DisplayClockOutTime displayTime={displayTime} hours={hours} minutes={minutes} amPm={amPm} />
     </View>
