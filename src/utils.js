@@ -1,7 +1,11 @@
-export const calculateClockOutTime = (startHours, startMinutes) => {
-  let hours = calculateClockOutHours(startHours).hours
-  let amPm = calculateClockOutHours(startHours).amPm
-  let time = { hours, minutes: parseInt(startMinutes), amPm }
+export const calculateClockOutTime = (startHours, startMinutes, lunchMinutes) => {
+  let handledMinutes = handleMinutes(lunchMinutes, startMinutes)
+  let minutes = handledMinutes.minutes
+  let calculatedClockOutHours = calculateClockOutHours(startHours)
+  let hours = calculatedClockOutHours.hours
+  hours += handledMinutes.hour
+  let amPm = calculatedClockOutHours.amPm
+  let time = { hours, minutes, amPm }
   return time
 }
 
@@ -11,14 +15,14 @@ export const calculateClockOutHours = startHours => {
   let amPm = 'am'
   let hours = parseInt(startHours)
   let clockOutTime = hours + 8
-  let morningClockInTime = startHoursAmPm === 'am'
-  let morningClockOutTime = determineAmPm(clockOutTime) === 'am'
-  let afternoonClockInTime = startHoursAmPm === 'pm'
-  let afternoonClockOutTime = determineAmPm(clockOutTime) === 'pm'
-  let morningShift = morningClockInTime && morningClockOutTime
-  let dayShift = morningClockInTime && afternoonClockOutTime
-  let afternoonShift = afternoonClockInTime && afternoonClockOutTime
-  let midnightShift = afternoonClockInTime && morningClockOutTime
+  // morning clock in time && morning clock out time
+  let morningShift = startHoursAmPm === 'am' && determineAmPm(clockOutTime) === 'am'
+  // morning clock in time && afternoon clock out time
+  let dayShift = startHoursAmPm === 'am' && determineAmPm(clockOutTime) === 'pm'
+  // afternoon clock in time && afternoon clock out time
+  let afternoonShift = startHoursAmPm === 'pm' && determineAmPm(clockOutTime) === 'pm'
+  // afternoon clock in time && morning clock out time
+  let midnightShift = startHoursAmPm === 'pm' && determineAmPm(clockOutTime) === 'am'
   if (morningShift) {
     clockOutHours = clockOutTime
   } else if (midnightShift) {
@@ -32,6 +36,18 @@ export const calculateClockOutHours = startHours => {
     clockOutHours = 12
   }
   return { hours: clockOutHours, amPm }
+}
+
+export const handleMinutes = (lunchMinutes, startMinutes) => {
+  startMinutes = parseInt(startMinutes) || 0
+  lunchMinutes = parseInt(lunchMinutes) || 0
+  let minutes = lunchMinutes + startMinutes
+  let hour = 0
+  if (minutes >= 60) {
+    minutes -= 60
+    hour = 1
+  }
+  return { hour, minutes }
 }
 
 export const determineAmPm = time => {

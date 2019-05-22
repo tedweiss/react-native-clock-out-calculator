@@ -1,4 +1,4 @@
-import { calculateClockOutHours, calculateClockOutTime, determineAmPm } from '../../src/utils'
+import { calculateClockOutHours, calculateClockOutTime, determineAmPm, handleMinutes } from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
   test('should return the hour someone should clock out based on a normal 8 hour day', () => {
@@ -51,5 +51,35 @@ describe('determineAmPm', () => {
   })
   test("should return 'pm' when the number '12' for noon is given", () => {
     expect(determineAmPm(12)).toEqual('pm')
+  })
+})
+
+describe('handleMinutes', () => {
+  test('should return the minutes that are passed in if less than 60', () => {
+    let minutes = 45
+    let returnedMinutes = 45
+    expect(handleMinutes(minutes).minutes).toEqual(returnedMinutes)
+  })
+  test('should return the minutes that are passed in minus 60 if more than 60', () => {
+    let minutes = 80
+    let returnedMinutes = 20
+    expect(handleMinutes(minutes).minutes).toEqual(returnedMinutes)
+  })
+  test('should return 1 hour if the minutes that are passed in are more than 60', () => {
+    let minutes = 80
+    let hour = 1
+    expect(handleMinutes(minutes).hour).toEqual(hour)
+  })
+  test('should return the total minutes of start minutes plus lunch minutes that are passed in if total is less than 60', () => {
+    let startMinutes = 15
+    let lunchMinutes = 10
+    let returnedMinutes = 25
+    expect(handleMinutes(lunchMinutes,startMinutes).minutes).toEqual(returnedMinutes)
+  })
+  test('should return the total minutes of start minutes plus lunch minutes that are passed in if total is more than 60', () => {
+    let startMinutes = 45
+    let lunchMinutes = 50
+    let returnedMinutes = 35
+    expect(handleMinutes(lunchMinutes,startMinutes).minutes).toEqual(returnedMinutes)
   })
 })
