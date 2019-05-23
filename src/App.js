@@ -1,12 +1,12 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import TimePicker from './components/TimePicker'
+import EndOfDayPicker from './components/EndOfDayPicker'
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <TimePicker />
+      <EndOfDayPicker />
     </View>
   )
 }

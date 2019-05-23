@@ -6,7 +6,7 @@ import Input from './Input'
 import ClockOutButton from './ClockOutButton'
 import { calculateClockOutTime } from '../utils'
 
-const TimePicker = () => {
+const EndOfDayPicker = () => {
   const [date, setDate] = useState(new Date())
   const [hours, setHours] = useState()
   const [minutes, setMinutes] = useState()
@@ -41,4 +41,4 @@ const TimePicker = () => {
   )
 }
 
-export default TimePicker
+export default EndOfDayPicker
