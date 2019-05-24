@@ -10,15 +10,25 @@ const TimePicker = () => {
   return (
     <View style={{ width: 300 }}>
       {screen === 0 && (
-        <TouchableOpacity
-          onPress={() => {
-            updateScreen(1)
-          }}
-          style={styles.button}>
-          <Text style={styles.buttonText}>End of Day</Text>
-        </TouchableOpacity>
+        <>
+          <TouchableOpacity
+            onPress={() => {
+              updateScreen(1)
+            }}
+            style={styles.button}>
+            <Text style={styles.buttonText}>End of Day</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              updateScreen(2)
+            }}
+            style={styles.button}>
+            <Text style={styles.buttonText}>End of Week</Text>
+          </TouchableOpacity>
+        </>
       )}
       {screen === 1 && <EndOfDayPicker updateScreen={updateScreen} />}
+      {screen === 2 && <Text>End of Week</Text>}
     </View>
   )
 }
