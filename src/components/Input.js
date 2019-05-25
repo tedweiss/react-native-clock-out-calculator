@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     width: 238,
     fontSize: 20,
     borderWidth: 1,
-    borderColor: 'powderblue'
+    borderColor: 'blue'
   }
 })
 
