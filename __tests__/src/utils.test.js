@@ -40,6 +40,9 @@ describe('calculateClockOutTime', () => {
   test('should return the minute someone should clock out including time for lunch', () => {
     expect(calculateClockOutTime('9', '15', '30').minutes).toEqual(45)
   })
+  test("should return the '0' when the start minutes and lunch time combine to '60'", () => {
+    expect(calculateClockOutTime('9', '30', '30').minutes).toEqual(0)
+  })
 })
 
 describe('determineAmPm', () => {
@@ -77,12 +80,12 @@ describe('handleMinutes', () => {
     let startMinutes = 15
     let lunchMinutes = 10
     let returnedMinutes = 25
-    expect(handleMinutes(lunchMinutes,startMinutes).minutes).toEqual(returnedMinutes)
+    expect(handleMinutes(lunchMinutes, startMinutes).minutes).toEqual(returnedMinutes)
   })
   test('should return the total minutes of start minutes plus lunch minutes that are passed in if total is more than 60', () => {
     let startMinutes = 45
     let lunchMinutes = 50
     let returnedMinutes = 35
-    expect(handleMinutes(lunchMinutes,startMinutes).minutes).toEqual(returnedMinutes)
+    expect(handleMinutes(lunchMinutes, startMinutes).minutes).toEqual(returnedMinutes)
   })
 })
