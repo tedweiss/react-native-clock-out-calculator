@@ -43,6 +43,9 @@ describe('calculateClockOutTime', () => {
   test("should return the '0' when the start minutes and lunch time combine to '60'", () => {
     expect(calculateClockOutTime('9', '30', '30').minutes).toEqual(0)
   })
+  test("should return the hour someone should clock out increased by one when the minutes combine to '60' or more", () => {
+    expect(calculateClockOutTime('9', '30', '30').hours).toEqual(6)
+  })
 })
 
 describe('determineAmPm', () => {
