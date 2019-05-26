@@ -37,6 +37,9 @@ describe('calculateClockOutTime', () => {
   test('should return the minute someone should clock out based on an 8 hour day', () => {
     expect(calculateClockOutTime('9', '30').minutes).toEqual(30)
   })
+  test('should return the minute someone should clock out including time for lunch', () => {
+    expect(calculateClockOutTime('9', '15', '30').minutes).toEqual(45)
+  })
 })
 
 describe('determineAmPm', () => {
