@@ -1,4 +1,4 @@
-import { calculateClockOutHours, calculateClockOutTime, determineAmPm, handleMinutes } from '../../src/utils'
+import { calculateClockOutHours, calculateClockOutTime, determineAmPm, handleMinutes, convertDecimalToMinutes } from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
   test('should return the hour someone should clock out based on a normal 8 hour day', () => {
@@ -93,5 +93,11 @@ describe('handleMinutes', () => {
     let lunchMinutes = 50
     let returnedMinutes = 35
     expect(handleMinutes(lunchMinutes, startMinutes).minutes).toEqual(returnedMinutes)
+  })
+})
+
+describe('convertDecimalToMinutes', () => {
+  test('should return the minutes after converting from decimal', () => {
+    expect(convertDecimalToMinutes('25')).toEqual(15)
   })
 })
