@@ -1,44 +1,57 @@
 import React, { useState } from 'react'
-import { DatePickerIOS, View } from 'react-native'
-
-import DisplayClockOutTime from './DisplayClockOutTime'
-import Input from './Input'
-import ClockOutButton from './ClockOutButton'
-import { calculateClockOutTime } from '../utils'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import EndOfDayPicker from './EndOfDayPicker'
+import EndOfWeekPicker from './EndOfWeekPicker'
 
 const TimePicker = () => {
-  const [date, setDate] = useState(new Date())
-  const [hours, setHours] = useState()
-  const [minutes, setMinutes] = useState()
-  const [amPm, setAmPm] = useState()
-  const [displayTime, setDisplayTime] = useState(false)
-  const [lunchTime, setLunchTime] = useState(0)
-  let dateHours = date.getHours()
-  let dateMinutes = date.getMinutes()
-
-  const updateTime = () => {
-    let clockOutTime = calculateClockOutTime(dateHours, dateMinutes, lunchTime)
-    const { amPm, hours, minutes } = clockOutTime
-    let displayMinutes = minutes < 10 ? '0' + minutes : minutes
-    setHours(hours.toString())
-    setMinutes(displayMinutes.toString())
-    setAmPm(amPm)
-    setDisplayTime(true)
-  }
-  const handleDateChange = () => {
-    displayTime ? setDisplayTime(false) : ''
-  }
-  const updateLunchTime = minutes => {
-    setLunchTime(minutes)
+  const [screen, setScreen] = useState(0)
+  const updateScreen = newScreen => {
+    setScreen(newScreen)
   }
   return (
     <View style={{ width: 300 }}>
-      <DatePickerIOS date={date} onDateChange={setDate} onChange={handleDateChange} mode={'time'} />
-      <Input changeText={updateLunchTime} placeholder={'Minutes for Lunch'}/>
-      <ClockOutButton updateTime={updateTime} />
-      <DisplayClockOutTime displayTime={displayTime} hours={hours} minutes={minutes} amPm={amPm} />
+      {screen === 0 && (
+        <>
+          <TouchableOpacity
+            onPress={() => {
+              updateScreen(1)
+            }}
+            style={styles.button}>
+            <Text style={styles.buttonText}>End of Day</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              updateScreen(2)
+            }}
+            style={styles.button}>
+            <Text style={styles.buttonText}>End of Week</Text>
+          </TouchableOpacity>
+        </>
+      )}
+      {screen === 1 && <EndOfDayPicker updateScreen={updateScreen} />}
+      {screen === 2 && <EndOfWeekPicker updateScreen={updateScreen} />}
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  button: {
+    marginTop: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    marginLeft: 30,
+    marginRight: 30,
+    backgroundColor: 'blue',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold'
+  }
+})
 
 export default TimePicker
