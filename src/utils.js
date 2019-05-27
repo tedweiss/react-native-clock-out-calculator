@@ -1,5 +1,13 @@
-export const calculateClockOutTime = (startHours, startMinutes, lunchMinutes) => {
-  let handledMinutes = handleMinutes(lunchMinutes, startMinutes)
+export const calculateClockOutTime = (startHours, startMinutes, lunchMinutes, timeSoFar) => {
+  let handledMinutes
+  if (timeSoFar) {
+    let minutesSoFar = timeSoFar.split('.')[1]
+    let convertedMinutesSoFar = convertDecimalToMinutes(minutesSoFar)
+    let handledSoFarMinutes = handleMinutes(convertedMinutesSoFar, startMinutes)
+    handledMinutes = handleMinutes(lunchMinutes, handledSoFarMinutes.minutes)
+  } else {
+    handledMinutes = handleMinutes(lunchMinutes, startMinutes)
+  }
   let minutes = handledMinutes.minutes
   let calculatedClockOutHours = calculateClockOutHours(startHours)
   let hours = calculatedClockOutHours.hours
@@ -48,6 +56,12 @@ export const handleMinutes = (lunchMinutes, startMinutes) => {
     hour = 1
   }
   return { hour, minutes }
+}
+
+export const convertDecimalToMinutes = decimal => {
+  let minute
+  minute = (parseInt(decimal) / 100) * 60
+  return minute
 }
 
 export const determineAmPm = time => {
