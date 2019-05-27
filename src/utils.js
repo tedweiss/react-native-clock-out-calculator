@@ -60,6 +60,8 @@ export const handleMinutes = (lunchMinutes, startMinutes) => {
 
 export const convertDecimalToMinutes = decimal => {
   let minute
+  // to account for tenths appearing as single minute
+  decimal = parseInt(decimal) < 10 ? decimal + '0' : decimal
   minute = (parseInt(decimal) / 100) * 60
   return minute
 }

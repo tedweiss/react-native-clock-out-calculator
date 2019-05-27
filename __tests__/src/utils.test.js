@@ -100,4 +100,7 @@ describe('convertDecimalToMinutes', () => {
   test('should return the minutes after converting from decimal', () => {
     expect(convertDecimalToMinutes('25')).toEqual(15)
   })
+  test('should return the minutes after converting from decimal when the minutes being passed in is a single digit', () => {
+    expect(convertDecimalToMinutes('5')).toEqual(30)
+  })
 })
