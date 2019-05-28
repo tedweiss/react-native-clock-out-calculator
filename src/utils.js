@@ -1,15 +1,17 @@
 export const calculateClockOutTime = (startHours, startMinutes, lunchMinutes, timeSoFar) => {
   let handledMinutes
+  let shift = 8
   if (timeSoFar) {
     let minutesSoFar = timeSoFar.split('.')[1]
+    let hoursSoFar = timeSoFar.split('.')[0]
+    shift = 40 - parseInt(hoursSoFar)
     let convertedMinutesSoFar = convertDecimalToMinutes(minutesSoFar)
-    let handledSoFarMinutes = handleMinutes(convertedMinutesSoFar, startMinutes)
-    handledMinutes = handleMinutes(lunchMinutes, handledSoFarMinutes.minutes)
+    handledMinutes = handleMinutes(lunchMinutes, startMinutes, convertedMinutesSoFar)
   } else {
     handledMinutes = handleMinutes(lunchMinutes, startMinutes)
   }
   let minutes = handledMinutes.minutes
-  let calculatedClockOutHours = calculateClockOutHours(startHours)
+  let calculatedClockOutHours = calculateClockOutHours(startHours, shift)
   let hours = calculatedClockOutHours.hours
   hours += handledMinutes.hour
   let amPm = calculatedClockOutHours.amPm
@@ -17,12 +19,12 @@ export const calculateClockOutTime = (startHours, startMinutes, lunchMinutes, ti
   return time
 }
 
-export const calculateClockOutHours = startHours => {
+export const calculateClockOutHours = (startHours, shift) => {
   let clockOutHours
   let startHoursAmPm = determineAmPm(startHours)
   let amPm = 'am'
   let hours = parseInt(startHours)
-  let clockOutTime = hours + 8
+  let clockOutTime = hours + shift
   // morning clock in time && morning clock out time
   let morningShift = startHoursAmPm === 'am' && determineAmPm(clockOutTime) === 'am'
   // morning clock in time && afternoon clock out time
@@ -46,14 +48,18 @@ export const calculateClockOutHours = startHours => {
   return { hours: clockOutHours, amPm }
 }
 
-export const handleMinutes = (lunchMinutes, startMinutes) => {
+export const handleMinutes = (lunchMinutes, startMinutes, minutesSoFar) => {
   startMinutes = parseInt(startMinutes) || 0
   lunchMinutes = parseInt(lunchMinutes) || 0
-  let minutes = lunchMinutes + startMinutes
+  minutesSoFar = parseInt(minutesSoFar) || 0
+  let minutes = lunchMinutes + startMinutes - minutesSoFar
   let hour = 0
   if (minutes >= 60) {
     minutes -= 60
     hour = 1
+  } else if (minutes < 0) {
+    minutes = 60 + minutes
+    hour = -1
   }
   return { hour, minutes }
 }
