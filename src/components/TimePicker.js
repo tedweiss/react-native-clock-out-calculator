@@ -12,6 +12,7 @@ const TimePicker = () => {
     <View style={{ width: 300 }}>
       {screen === 0 && (
         <>
+          <Text style={styles.title}>What time to clock out?</Text>
           <TouchableOpacity
             onPress={() => {
               updateScreen(1)
@@ -35,8 +36,13 @@ const TimePicker = () => {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    textAlign: 'center',
+    fontSize: 28,
+    marginBottom: 40
+  },
   button: {
-    marginTop: 10,
+    marginTop: 25,
     paddingTop: 15,
     paddingBottom: 15,
     marginLeft: 30,

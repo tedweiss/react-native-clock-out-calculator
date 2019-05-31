@@ -1,32 +1,38 @@
-import { calculateClockOutHours, calculateClockOutTime, determineAmPm, handleMinutes, convertDecimalToMinutes } from '../../src/utils'
+import {
+  calculateClockOutHours,
+  calculateClockOutTime,
+  determineAmPm,
+  handleMinutes,
+  convertDecimalToMinutes
+} from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
   test('should return the hour someone should clock out based on a normal 8 hour day', () => {
-    expect(calculateClockOutHours(9).hours).toEqual(5)
+    expect(calculateClockOutHours(9, 8).hours).toEqual(5)
   })
   test('should return the hour someone should clock out based on an 8 hour day, if both clock in and clock out times are in the am', () => {
-    expect(calculateClockOutHours(2).hours).toEqual(10)
+    expect(calculateClockOutHours(2, 8).hours).toEqual(10)
   })
   test('should return the hour someone should clock out based on an 8 hour day, if both clock in and clock out times are in the pm', () => {
-    expect(calculateClockOutHours(13).hours).toEqual(9)
+    expect(calculateClockOutHours(13, 8).hours).toEqual(9)
   })
   test('should return the hour someone should clock out based on an 8 hour day, if clock in is before midnight and clock out is after midnight', () => {
-    expect(calculateClockOutHours(20).hours).toEqual(4)
+    expect(calculateClockOutHours(20, 8).hours).toEqual(4)
   })
   test("should return '12' for midnight instead of '0'", () => {
-    expect(calculateClockOutHours(16).hours).toEqual(12)
+    expect(calculateClockOutHours(16, 8).hours).toEqual(12)
   })
   test("should return 'am' when clocking in and out before noon", () => {
-    expect(calculateClockOutHours(2).amPm).toEqual('am')
+    expect(calculateClockOutHours(2, 8).amPm).toEqual('am')
   })
   test("should return 'am' when clocking in before midnight and out before noon", () => {
-    expect(calculateClockOutHours(20).amPm).toEqual('am')
+    expect(calculateClockOutHours(20, 8).amPm).toEqual('am')
   })
   test("should return 'pm' when clocking in before noon and out after noon", () => {
-    expect(calculateClockOutHours(9).amPm).toEqual('pm')
+    expect(calculateClockOutHours(9, 8).amPm).toEqual('pm')
   })
   test("should return 'pm' when clocking in and out after noon", () => {
-    expect(calculateClockOutHours(14).amPm).toEqual('pm')
+    expect(calculateClockOutHours(14, 8).amPm).toEqual('pm')
   })
 })
 
@@ -47,7 +53,10 @@ describe('calculateClockOutTime', () => {
     expect(calculateClockOutTime('9', '30', '30').hours).toEqual(6)
   })
   test('should return the minute someone should clock out including time for lunch and time so far', () => {
-    expect(calculateClockOutTime('9', '15', '30', '32.45').minutes).toEqual(12)
+    expect(calculateClockOutTime('9', '15', '30', '32.45').minutes).toEqual(18)
+  })
+  test('should return the hour someone should clock out including time for lunch and time so far', () => {
+    expect(calculateClockOutTime('9', '15', '30', '33.45').hours).toEqual(4)
   })
 })
 
