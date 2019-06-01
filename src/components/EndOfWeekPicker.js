@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { DatePickerIOS, Text, TouchableOpacity, View } from 'react-native'
+import { DatePickerIOS, View } from 'react-native'
 
+import Back from './Back'
+import ClockOutButton from './ClockOutButton'
 import DisplayClockOutTime from './DisplayClockOutTime'
 import Input from './Input'
-import ClockOutButton from './ClockOutButton'
 import { calculateClockOutTime } from '../utils'
 
 const EndOfWeekPicker = props => {
@@ -38,12 +39,7 @@ const EndOfWeekPicker = props => {
   }
   return (
     <View style={{ width: 300 }}>
-      <TouchableOpacity
-        onPress={() => {
-          updateScreen(0)
-        }}>
-        <Text style={{ fontSize: 16 }}>{'<'} Back</Text>
-      </TouchableOpacity>
+      <Back updateScreen={updateScreen} />
       <Input changeText={updateTimeSoFar} placeholder={'Total so Far:'} />
       <DatePickerIOS date={date} onDateChange={setDate} onChange={handleDateChange} mode={'time'} />
       <Input changeText={updateLunchTime} placeholder={'Minutes for Lunch'} />

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { DatePickerIOS, Text, TouchableOpacity, View } from 'react-native'
+import { DatePickerIOS, View } from 'react-native'
 
+import Back from './Back'
+import ClockOutButton from './ClockOutButton'
 import DisplayClockOutTime from './DisplayClockOutTime'
 import Input from './Input'
-import ClockOutButton from './ClockOutButton'
 import { calculateClockOutTime } from '../utils'
 
 const CatchUpPicker = props => {
@@ -42,12 +43,7 @@ const CatchUpPicker = props => {
   }
   return (
     <View style={{ width: 300 }}>
-      <TouchableOpacity
-        onPress={() => {
-          updateScreen(0)
-        }}>
-        <Text style={{ fontSize: 16 }}>{'<'} Back</Text>
-      </TouchableOpacity>
+      <Back updateScreen={updateScreen} />
       <Input changeText={updateTimeSoFar} placeholder={'Total Time so Far:'} />
       <Input changeText={updateDaysSoFar} placeholder={'Work Days so Far:'} />
       <DatePickerIOS date={date} onDateChange={setDate} onChange={handleDateChange} mode={'time'} />
