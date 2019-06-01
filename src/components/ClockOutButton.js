@@ -12,7 +12,7 @@ const ClockOutButton = props => {
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 10,
+    marginTop: 25,
     paddingTop: 15,
     paddingBottom: 15,
     marginLeft: 30,
