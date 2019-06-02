@@ -3,7 +3,8 @@ import {
   calculateClockOutTime,
   determineAmPm,
   handleMinutes,
-  convertDecimalToMinutes
+  convertDecimalToMinutes,
+  calculateShiftHours
 } from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
@@ -111,5 +112,12 @@ describe('convertDecimalToMinutes', () => {
   })
   test('should return the minutes after converting from decimal when the minutes being passed in is a single digit', () => {
     expect(convertDecimalToMinutes('5')).toEqual(30)
+  })
+})
+
+describe('calculateShiftHours', () => {
+  test('should return the regular shift hours', () => {
+    let regularShiftHours = 8
+    expect(calculateShiftHours(regularShiftHours)).toEqual(8)
   })
 })
