@@ -57,7 +57,7 @@ describe('calculateClockOutTime', () => {
     expect(calculateClockOutTime('9', '15', '30', '32.45').minutes).toEqual(18)
   })
   test('should return the hour someone should clock out including time for lunch and time so far', () => {
-    expect(calculateClockOutTime('9', '15', '30', '33.45').hours).toEqual(4)
+    expect(calculateClockOutTime('9', '15', '30', '33.45', '4').hours).toEqual(4)
   })
 })
 
