@@ -21,7 +21,7 @@ const CatchUpPicker = props => {
   let dateMinutes = date.getMinutes()
 
   const updateTime = () => {
-    let clockOutTime = calculateClockOutTime(dateHours, dateMinutes, lunchTime, timeSoFar)
+    let clockOutTime = calculateClockOutTime(dateHours, dateMinutes, lunchTime, timeSoFar, daysSoFar)
     const { amPm, hours, minutes } = clockOutTime
     let displayMinutes = minutes < 10 ? '0' + minutes : minutes
     setHours(hours.toString())
