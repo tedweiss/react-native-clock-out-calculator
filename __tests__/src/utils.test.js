@@ -125,4 +125,10 @@ describe('calculateShiftHours', () => {
     let daysSoFar = '2'
     expect(calculateShiftHours(regularShiftHours, daysSoFar)).toEqual(24)
   })
+  test('should return the shift hours adding the number of days worked subtracting the hours worked so far', () => {
+    let regularShiftHours = 8
+    let daysSoFar = '2'
+    let hoursSoFar = '18'
+    expect(calculateShiftHours(regularShiftHours, daysSoFar, hoursSoFar)).toEqual(6)
+  })
 })
