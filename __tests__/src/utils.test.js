@@ -120,4 +120,9 @@ describe('calculateShiftHours', () => {
     let regularShiftHours = 8
     expect(calculateShiftHours(regularShiftHours)).toEqual(8)
   })
+  test('should return the shift hours after passing in the number of days worked', () => {
+    let regularShiftHours = 8
+    let daysSoFar = '2'
+    expect(calculateShiftHours(regularShiftHours, daysSoFar)).toEqual(24)
+  })
 })

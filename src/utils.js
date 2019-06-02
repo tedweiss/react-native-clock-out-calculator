@@ -65,6 +65,7 @@ export const handleMinutes = (lunchMinutes, startMinutes, minutesSoFar) => {
 }
 
 export const calculateShiftHours = (regularShiftHours, daysSoFar, hoursSoFar) => {
+  regularShiftHours = parseInt(regularShiftHours)
   daysSoFar = parseInt(daysSoFar) || 0
   hoursSoFar = parseInt(hoursSoFar) || 0
   // previous days
