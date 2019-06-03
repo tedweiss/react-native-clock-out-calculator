@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
-import EndOfDayPicker from './EndOfDayPicker'
-import EndOfWeekPicker from './EndOfWeekPicker'
-import CatchUpPicker from './CatchUpPicker'
 import ClockOutPicker from './ClockOutPicker'
 
 const TimePicker = () => {
