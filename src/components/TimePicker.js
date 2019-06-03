@@ -4,6 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import EndOfDayPicker from './EndOfDayPicker'
 import EndOfWeekPicker from './EndOfWeekPicker'
 import CatchUpPicker from './CatchUpPicker'
+import ClockOutPicker from './ClockOutPicker'
 
 const TimePicker = () => {
   const [screen, setScreen] = useState(0)
@@ -34,13 +35,13 @@ const TimePicker = () => {
               updateScreen(3)
             }}
             style={styles.button}>
-            <Text style={styles.buttonText}>Catch Up</Text>
+            <Text style={styles.buttonText}>Get on Track</Text>
           </TouchableOpacity>
         </>
       )}
-      {screen === 1 && <EndOfDayPicker updateScreen={updateScreen} />}
-      {screen === 2 && <EndOfWeekPicker updateScreen={updateScreen} />}
-      {screen === 3 && <CatchUpPicker updateScreen={updateScreen} />}
+      {screen === 1 && <ClockOutPicker updateScreen={updateScreen} />}
+      {screen === 2 && <ClockOutPicker updateScreen={updateScreen} endOfWeek />}
+      {screen === 3 && <ClockOutPicker updateScreen={updateScreen} getOnTrack />}
     </View>
   )
 }
