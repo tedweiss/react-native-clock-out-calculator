@@ -8,7 +8,7 @@ import Input from './Input'
 import { calculateClockOutTime } from '../utils'
 
 const ClockOutPicker = props => {
-  const { endOfWeek, getOnTrack, updateScreen } = props
+  const { endOfWeek, endOf2Weeks, getOnTrack, updateScreen } = props
   const [date, setDate] = useState(new Date())
   const [hours, setHours] = useState()
   const [minutes, setMinutes] = useState()
@@ -16,7 +16,7 @@ const ClockOutPicker = props => {
   const [displayTime, setDisplayTime] = useState(false)
   const [lunchTime, setLunchTime] = useState(0)
   const [timeSoFar, setTimeSoFar] = useState(0)
-  const [daysSoFar, setDaysSoFar] = useState(endOfWeek ? 4 : 0)
+  const [daysSoFar, setDaysSoFar] = useState(endOfWeek ? 4 : endOf2Weeks ? 9 : 0)
   let dateHours = date.getHours()
   let dateMinutes = date.getMinutes()
 
@@ -44,7 +44,9 @@ const ClockOutPicker = props => {
   return (
     <View style={{ width: 300 }}>
       <Back updateScreen={updateScreen} />
-      {(endOfWeek || getOnTrack) && <Input changeText={updateTimeSoFar} placeholder={'Total Time so Far:'} />}
+      {(endOfWeek || endOf2Weeks || getOnTrack) && (
+        <Input changeText={updateTimeSoFar} placeholder={'Total Time so Far:'} />
+      )}
       {getOnTrack && <Input changeText={updateDaysSoFar} placeholder={'Work Days so Far:'} />}
       <DatePickerIOS date={date} onDateChange={setDate} onChange={handleDateChange} mode={'time'} />
       <Input changeText={updateLunchTime} placeholder={'Minutes for Lunch'} />

@@ -32,13 +32,21 @@ const TimePicker = () => {
               updateScreen(3)
             }}
             style={styles.button}>
+            <Text style={styles.buttonText}>End of Two Weeks</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              updateScreen(4)
+            }}
+            style={styles.button}>
             <Text style={styles.buttonText}>Get on Track</Text>
           </TouchableOpacity>
         </>
       )}
       {screen === 1 && <ClockOutPicker updateScreen={updateScreen} />}
       {screen === 2 && <ClockOutPicker updateScreen={updateScreen} endOfWeek />}
-      {screen === 3 && <ClockOutPicker updateScreen={updateScreen} getOnTrack />}
+      {screen === 3 && <ClockOutPicker updateScreen={updateScreen} endOf2Weeks />}
+      {screen === 4 && <ClockOutPicker updateScreen={updateScreen} getOnTrack />}
     </View>
   )
 }
