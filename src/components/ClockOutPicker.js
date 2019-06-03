@@ -16,7 +16,7 @@ const ClockOutPicker = props => {
   const [displayTime, setDisplayTime] = useState(false)
   const [lunchTime, setLunchTime] = useState(0)
   const [timeSoFar, setTimeSoFar] = useState(0)
-  const [daysSoFar, setDaysSoFar] = useState(0)
+  const [daysSoFar, setDaysSoFar] = useState(endOfWeek ? 4 : 0)
   let dateHours = date.getHours()
   let dateMinutes = date.getMinutes()
 
