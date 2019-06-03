@@ -3,7 +3,8 @@ import {
   calculateClockOutTime,
   determineAmPm,
   handleMinutes,
-  convertDecimalToMinutes
+  convertDecimalToMinutes,
+  calculateShiftHours
 } from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
@@ -56,7 +57,7 @@ describe('calculateClockOutTime', () => {
     expect(calculateClockOutTime('9', '15', '30', '32.45').minutes).toEqual(18)
   })
   test('should return the hour someone should clock out including time for lunch and time so far', () => {
-    expect(calculateClockOutTime('9', '15', '30', '33.45').hours).toEqual(4)
+    expect(calculateClockOutTime('9', '15', '30', '33.45', '4').hours).toEqual(4)
   })
 })
 
@@ -111,5 +112,23 @@ describe('convertDecimalToMinutes', () => {
   })
   test('should return the minutes after converting from decimal when the minutes being passed in is a single digit', () => {
     expect(convertDecimalToMinutes('5')).toEqual(30)
+  })
+})
+
+describe('calculateShiftHours', () => {
+  test('should return the regular shift hours', () => {
+    let regularShiftHours = 8
+    expect(calculateShiftHours(regularShiftHours)).toEqual(8)
+  })
+  test('should return the shift hours after passing in the number of days worked', () => {
+    let regularShiftHours = 8
+    let daysSoFar = '2'
+    expect(calculateShiftHours(regularShiftHours, daysSoFar)).toEqual(24)
+  })
+  test('should return the shift hours adding the number of days worked subtracting the hours worked so far', () => {
+    let regularShiftHours = 8
+    let daysSoFar = '2'
+    let hoursSoFar = '18'
+    expect(calculateShiftHours(regularShiftHours, daysSoFar, hoursSoFar)).toEqual(6)
   })
 })

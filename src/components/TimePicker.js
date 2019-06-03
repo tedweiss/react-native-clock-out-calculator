@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import EndOfDayPicker from './EndOfDayPicker'
-import EndOfWeekPicker from './EndOfWeekPicker'
+
+import ClockOutPicker from './ClockOutPicker'
 
 const TimePicker = () => {
   const [screen, setScreen] = useState(0)
@@ -27,10 +27,18 @@ const TimePicker = () => {
             style={styles.button}>
             <Text style={styles.buttonText}>End of Week</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              updateScreen(3)
+            }}
+            style={styles.button}>
+            <Text style={styles.buttonText}>Get on Track</Text>
+          </TouchableOpacity>
         </>
       )}
-      {screen === 1 && <EndOfDayPicker updateScreen={updateScreen} />}
-      {screen === 2 && <EndOfWeekPicker updateScreen={updateScreen} />}
+      {screen === 1 && <ClockOutPicker updateScreen={updateScreen} />}
+      {screen === 2 && <ClockOutPicker updateScreen={updateScreen} endOfWeek />}
+      {screen === 3 && <ClockOutPicker updateScreen={updateScreen} getOnTrack />}
     </View>
   )
 }

@@ -1,10 +1,11 @@
-export const calculateClockOutTime = (startHours, startMinutes, lunchMinutes, timeSoFar) => {
+export const calculateClockOutTime = (startHours, startMinutes, lunchMinutes, timeSoFar, daysSoFar) => {
   let handledMinutes
-  let shift = 8
+  let regularShiftHours = 8
+  let shift = calculateShiftHours(regularShiftHours)
   if (timeSoFar) {
     let minutesSoFar = timeSoFar.split('.')[1]
     let hoursSoFar = timeSoFar.split('.')[0]
-    shift = 40 - parseInt(hoursSoFar)
+    shift = calculateShiftHours(regularShiftHours, daysSoFar, hoursSoFar)
     let convertedMinutesSoFar = convertDecimalToMinutes(minutesSoFar)
     handledMinutes = handleMinutes(lunchMinutes, startMinutes, convertedMinutesSoFar)
   } else {
@@ -62,6 +63,20 @@ export const handleMinutes = (lunchMinutes, startMinutes, minutesSoFar) => {
     hour = -1
   }
   return { hour, minutes }
+}
+
+export const calculateShiftHours = (regularShiftHours, daysSoFar, hoursSoFar) => {
+  regularShiftHours = parseInt(regularShiftHours)
+  daysSoFar = parseInt(daysSoFar) || 0
+  hoursSoFar = parseInt(hoursSoFar) || 0
+  // previous days
+  let shiftHours = daysSoFar * regularShiftHours
+  // add 8 hours for current day
+  shiftHours = shiftHours + regularShiftHours
+  // subtract hours so far
+  shiftHours = shiftHours - hoursSoFar
+  // return current day's shift hours needed
+  return shiftHours
 }
 
 export const convertDecimalToMinutes = decimal => {
