@@ -94,3 +94,15 @@ export const determineAmPm = time => {
   let amPm = afternoon && beforeMidnight ? 'pm' : 'am'
   return amPm
 }
+
+export const calculateTotalTime = (timeSoFar, hoursIn, minutesIn, hoursOut, minutesOut,lunchMinutes) => {
+  hoursIn = parseInt(hoursIn) || 0
+  hoursOut = parseInt(hoursOut) || 0
+  let totalTime
+  hoursIn = parseInt(hoursIn)
+  hoursOut = parseInt(hoursOut)
+  // hours in and out both before noon
+  if (hoursIn <= 12 && hoursOut <= 12) {
+    totalTime = hoursOut - hoursIn}
+  return totalTime
+}

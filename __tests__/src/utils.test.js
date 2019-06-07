@@ -4,7 +4,8 @@ import {
   determineAmPm,
   handleMinutes,
   convertDecimalToMinutes,
-  calculateShiftHours
+  calculateShiftHours,
+  calculateTotalTime
 } from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
@@ -130,5 +131,11 @@ describe('calculateShiftHours', () => {
     let daysSoFar = '2'
     let hoursSoFar = '18'
     expect(calculateShiftHours(regularShiftHours, daysSoFar, hoursSoFar)).toEqual(6)
+  })
+})
+
+describe('calculateTotalTime', () => {
+  test('should return total hours worked', () => {
+    expect(calculateTotalTime('','2','','10','','')).toEqual(8)
   })
 })
