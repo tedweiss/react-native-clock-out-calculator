@@ -105,9 +105,13 @@ export const calculateTotalTime = (timeSoFar, hoursIn, minutesIn, hoursOut, minu
 
 export const calculateTotalShiftHours = (hoursIn, hoursOut) => {
   let shiftHours
-  // hours in and out are both before noon
+  // hours in and out are both before noon ||
+  // hours in and out are both after noon
   if ((hoursIn <= 12 && hoursOut <= 12) || (hoursIn > 12 && hoursOut > 12)) {
     shiftHours = hoursOut - hoursIn
+    // hours in is before noon and hours out is after noon
+  } else if (hoursIn <= 12 && hoursOut > 12) {
+    shiftHours = 12 - hoursIn + hoursOut - 12
   }
   return shiftHours
 }
