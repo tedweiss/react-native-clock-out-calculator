@@ -49,11 +49,13 @@ export const calculateClockOutHours = (startHours, shift) => {
   return { hours: clockOutHours, amPm }
 }
 
-export const handleMinutes = (lunchMinutes, startMinutes, minutesSoFar) => {
+export const handleMinutes = (lunchMinutes, startMinutes, minutesSoFar, minutesIn, minutesOut) => {
   startMinutes = parseInt(startMinutes) || 0
   lunchMinutes = parseInt(lunchMinutes) || 0
   minutesSoFar = parseInt(minutesSoFar) || 0
-  let minutes = lunchMinutes + startMinutes - minutesSoFar
+  minutesIn = parseInt(minutesIn) || 0
+  minutesOut = parseInt(minutesOut) || 0
+  let minutes = minutesOut ? minutesIn + minutesOut - lunchMinutes : lunchMinutes + startMinutes - minutesSoFar
   let hour = 0
   if (minutes >= 60) {
     minutes -= 60
