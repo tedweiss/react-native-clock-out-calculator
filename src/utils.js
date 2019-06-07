@@ -89,6 +89,12 @@ export const convertDecimalToMinutes = decimal => {
   return minute
 }
 
+export const convertMinutesToDecimal = minutes => {
+  let decimal
+  decimal = minutes / 60
+  return decimal
+}
+
 export const determineAmPm = time => {
   let hour = parseInt(time)
   let afternoon = hour >= 12

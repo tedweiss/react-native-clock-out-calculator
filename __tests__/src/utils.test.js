@@ -6,7 +6,8 @@ import {
   convertDecimalToMinutes,
   calculateShiftHours,
   calculateTotalTime,
-  calculateTotalShiftHours
+  calculateTotalShiftHours,
+  convertMinutesToDecimal
 } from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
@@ -128,6 +129,12 @@ describe('convertDecimalToMinutes', () => {
   })
   test('should return the minutes after converting from decimal when the minutes being passed in is a single digit', () => {
     expect(convertDecimalToMinutes('5')).toEqual(30)
+  })
+})
+
+describe('convertMinutesToDecimal', () => {
+  test('should return a decimal when minutes are passed in', () => {
+    expect(convertMinutesToDecimal('45')).toEqual(0.75)
   })
 })
 
