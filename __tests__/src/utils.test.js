@@ -5,7 +5,8 @@ import {
   handleMinutes,
   convertDecimalToMinutes,
   calculateShiftHours,
-  calculateTotalTime
+  calculateTotalTime,
+  calculateTotalShiftHours
 } from '../../src/utils'
 
 describe('calculateClockOutHours', () => {
@@ -136,6 +137,12 @@ describe('calculateShiftHours', () => {
 
 describe('calculateTotalTime', () => {
   test('should return total hours worked', () => {
-    expect(calculateTotalTime('','2','','10','','')).toEqual(8)
+    expect(calculateTotalTime('', '2', '', '10', '', '')).toEqual(8)
+  })
+})
+
+describe('calculateTotalShiftHours', () => {
+  test('should return the hours when hours in and out are both before noon', () => {
+    expect(calculateTotalShiftHours(2, 10)).toEqual(8)
   })
 })

@@ -95,14 +95,19 @@ export const determineAmPm = time => {
   return amPm
 }
 
-export const calculateTotalTime = (timeSoFar, hoursIn, minutesIn, hoursOut, minutesOut,lunchMinutes) => {
+export const calculateTotalTime = (timeSoFar, hoursIn, minutesIn, hoursOut, minutesOut, lunchMinutes) => {
   hoursIn = parseInt(hoursIn) || 0
   hoursOut = parseInt(hoursOut) || 0
   let totalTime
-  hoursIn = parseInt(hoursIn)
-  hoursOut = parseInt(hoursOut)
-  // hours in and out both before noon
-  if (hoursIn <= 12 && hoursOut <= 12) {
-    totalTime = hoursOut - hoursIn}
+  totalTime = calculateTotalShiftHours(hoursIn, hoursOut)
   return totalTime
+}
+
+export const calculateTotalShiftHours = (hoursIn, hoursOut) => {
+  let shiftHours
+  // hours in and out are both before noon
+  if (hoursIn <= 12 && hoursOut <= 12) {
+    shiftHours = hoursOut - hoursIn
+  }
+  return shiftHours
 }
