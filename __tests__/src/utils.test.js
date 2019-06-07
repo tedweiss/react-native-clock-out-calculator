@@ -151,4 +151,7 @@ describe('calculateTotalShiftHours', () => {
   test('should return the hours when hours in is before noon and hours out is after noon', () => {
     expect(calculateTotalShiftHours(9, 17)).toEqual(8)
   })
+  test('should return the hours when hours in is after noon and hours out is before noon', () => {
+    expect(calculateTotalShiftHours(17, 9)).toEqual(8)
+  })
 })

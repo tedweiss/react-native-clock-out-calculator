@@ -112,6 +112,9 @@ export const calculateTotalShiftHours = (hoursIn, hoursOut) => {
     // hours in is before noon and hours out is after noon
   } else if (hoursIn <= 12 && hoursOut > 12) {
     shiftHours = 12 - hoursIn + hoursOut - 12
+    // hours in is after noon and hours out is before noon
+  } else if (hoursIn > 12 && hoursOut <= 12) {
+    shiftHours = hoursIn - hoursOut
   }
   return shiftHours
 }
