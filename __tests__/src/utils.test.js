@@ -136,6 +136,9 @@ describe('convertMinutesToDecimal', () => {
   test('should return a decimal when minutes are passed in', () => {
     expect(convertMinutesToDecimal('45')).toEqual(0.75)
   })
+  test('should return a decimal rounded to 2 place values', () => {
+    expect(convertMinutesToDecimal('45')).toEqual(0.75)
+  })
 })
 
 describe('calculateShiftHours', () => {
@@ -159,6 +162,9 @@ describe('calculateShiftHours', () => {
 describe('calculateTotalTime', () => {
   test('should return total hours worked', () => {
     expect(calculateTotalTime('', '2', '', '10', '', '')).toEqual(8)
+  })
+  test('should return total time worked with just hours and minutes in and out passed in', () => {
+    expect(calculateTotalTime('', '2', '30', '9', '22', '')).toEqual(7.87)
   })
 })
 

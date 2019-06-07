@@ -92,6 +92,7 @@ export const convertDecimalToMinutes = decimal => {
 export const convertMinutesToDecimal = minutes => {
   let decimal
   decimal = minutes / 60
+  decimal = parseFloat(decimal.toFixed(2))
   return decimal
 }
 
@@ -106,8 +107,15 @@ export const determineAmPm = time => {
 export const calculateTotalTime = (timeSoFar, hoursIn, minutesIn, hoursOut, minutesOut, lunchMinutes) => {
   hoursIn = parseInt(hoursIn) || 0
   hoursOut = parseInt(hoursOut) || 0
+  minutesIn = parseInt(minutesIn) || 0
+  minutesOut = parseInt(minutesOut) || 0
   let totalTime
-  totalTime = calculateTotalShiftHours(hoursIn, hoursOut)
+  let handledMinutes = handleMinutes('', '', '', minutesIn, minutesOut)
+  let minutes = handledMinutes.minutes
+  minutes = convertMinutesToDecimal(minutes)
+  hoursIn = hoursIn + handledMinutes.hour
+  let hours = calculateTotalShiftHours(hoursIn, hoursOut)
+  totalTime = hours + minutes
   return totalTime
 }
 
