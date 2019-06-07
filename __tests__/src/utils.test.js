@@ -106,6 +106,13 @@ describe('handleMinutes', () => {
     let returnedMinutes = 35
     expect(handleMinutes(lunchMinutes, startMinutes).minutes).toEqual(returnedMinutes)
   })
+  test('should return the total minutes of start minutes plus lunch minutes minus minutes so far', () => {
+    let startMinutes = 45
+    let lunchMinutes = 50
+    let minutesSoFar = 20
+    let returnedMinutes = 15
+    expect(handleMinutes(lunchMinutes, startMinutes, minutesSoFar).minutes).toEqual(returnedMinutes)
+  })
 })
 
 describe('convertDecimalToMinutes', () => {
