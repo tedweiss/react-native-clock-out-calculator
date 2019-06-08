@@ -139,6 +139,9 @@ describe('convertMinutesToDecimal', () => {
   test('should return a decimal rounded to 2 place values', () => {
     expect(convertMinutesToDecimal('45')).toEqual(0.75)
   })
+  test('should return a decimal greater than 1 when minutesSoFar passed in makes the minutes more than 60', () => {
+    expect(convertMinutesToDecimal('45','50')).toEqual(1.25)
+  })
 })
 
 describe('calculateShiftHours', () => {
@@ -168,6 +171,9 @@ describe('calculateTotalTime', () => {
   })
   test('should return total time worked with lunch minutes and hours and minutes in and out passed in', () => {
     expect(calculateTotalTime('', '2', '30', '9', '22', '30')).toEqual(7.37)
+  })
+  test('should return total time worked with time so far and lunch minutes and hours and minutes in and out passed in', () => {
+    expect(calculateTotalTime('16.33', '2', '20', '9', '50', '30')).toEqual(24)
   })
 })
 

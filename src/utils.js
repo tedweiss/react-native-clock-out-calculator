@@ -89,10 +89,11 @@ export const convertDecimalToMinutes = decimal => {
   return minute
 }
 
-export const convertMinutesToDecimal = minutes => {
+export const convertMinutesToDecimal = (minutes, minutesSoFar) => {
   let decimal
   decimal = minutes / 60
   decimal = parseFloat(decimal.toFixed(2))
+  decimal = decimal + parseFloat('0.' + minutesSoFar)
   return decimal
 }
 
@@ -109,12 +110,19 @@ export const calculateTotalTime = (timeSoFar, hoursIn, minutesIn, hoursOut, minu
   hoursOut = parseInt(hoursOut) || 0
   minutesIn = parseInt(minutesIn) || 0
   minutesOut = parseInt(minutesOut) || 0
+  let hoursSoFar = 0
+  let minutesSoFar = 0
+  if (timeSoFar) {
+    hoursSoFar = timeSoFar.split('.')[0]
+    minutesSoFar = timeSoFar.split('.')[1]
+  }
   let totalTime
   let handledMinutes = handleMinutes(lunchMinutes, '', '', minutesIn, minutesOut)
   let minutes = handledMinutes.minutes
-  minutes = convertMinutesToDecimal(minutes)
+  minutes = convertMinutesToDecimal(minutes, minutesSoFar)
   hoursIn = hoursIn + handledMinutes.hour
   let hours = calculateTotalShiftHours(hoursIn, hoursOut)
+  hours = hours + parseInt(hoursSoFar)
   totalTime = hours + minutes
   return totalTime
 }
