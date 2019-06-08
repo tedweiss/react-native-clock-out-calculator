@@ -166,6 +166,9 @@ describe('calculateTotalTime', () => {
   test('should return total time worked with just hours and minutes in and out passed in', () => {
     expect(calculateTotalTime('', '2', '30', '9', '22', '')).toEqual(7.87)
   })
+  test('should return total time worked with lunch minutes and hours and minutes in and out passed in', () => {
+    expect(calculateTotalTime('', '2', '30', '9', '22', '30')).toEqual(7.37)
+  })
 })
 
 describe('calculateTotalShiftHours', () => {

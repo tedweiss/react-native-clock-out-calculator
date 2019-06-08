@@ -110,7 +110,7 @@ export const calculateTotalTime = (timeSoFar, hoursIn, minutesIn, hoursOut, minu
   minutesIn = parseInt(minutesIn) || 0
   minutesOut = parseInt(minutesOut) || 0
   let totalTime
-  let handledMinutes = handleMinutes('', '', '', minutesIn, minutesOut)
+  let handledMinutes = handleMinutes(lunchMinutes, '', '', minutesIn, minutesOut)
   let minutes = handledMinutes.minutes
   minutes = convertMinutesToDecimal(minutes)
   hoursIn = hoursIn + handledMinutes.hour
